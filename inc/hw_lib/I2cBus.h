@@ -12,6 +12,11 @@ public:
   std::vector<uint8_t> scan();
   bool isPresent(uint8_t address);
 
+  bool write(uint8_t address, const uint8_t *data, size_t length);
+  bool writeReg(uint8_t address, uint8_t reg, uint8_t value);
+  bool read(uint8_t address, uint8_t *buffer, size_t length);
+  bool readRegs(uint8_t address, uint8_t reg, uint8_t *buffer, size_t length);
+
   TwoWire &wire();
 
 private:

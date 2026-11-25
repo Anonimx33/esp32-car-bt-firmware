@@ -19,6 +19,7 @@ void BtAudio::begin(uint8_t pinBck, uint8_t pinWs, uint8_t pinData) {
   sink_->set_avrc_metadata_callback(onMetadata);
   sink_->set_avrc_rn_playstatus_callback(onPlayStatus);
   sink_->set_on_connection_state_changed(onConnection, this);
+  sink_->set_on_audio_state_changed(onAudioState, this);
   sink_->set_auto_reconnect(true);
   sink_->start(deviceName_);
 }
@@ -93,4 +94,9 @@ void BtAudio::onConnection(esp_a2d_connection_state_t state, void *obj) {
 void BtAudio::onPlayStatus(esp_avrc_playback_stat_t status) {
   if (!instance_) return;
   instance_->playing_ = (status == ESP_AVRC_PLAYBACK_PLAYING);
+}
+
+void BtAudio::onAudioState(esp_a2d_audio_state_t state, void *obj) {
+  auto *self = static_cast<BtAudio *>(obj);
+  self->playing_ = (state == ESP_A2D_AUDIO_STATE_STARTED);
 }

@@ -33,6 +33,7 @@ private:
   static void onMetadata(uint8_t id, const uint8_t *text);
   static void onConnection(esp_a2d_connection_state_t state, void *obj);
   static void onPlayStatus(esp_avrc_playback_stat_t status);
+  static void onAudioState(esp_a2d_audio_state_t state, void *obj);
 
   static BtAudio *instance_;
 

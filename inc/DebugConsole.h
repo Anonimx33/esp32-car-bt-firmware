@@ -14,6 +14,8 @@ public:
 private:
   void printHelp();
   void printTrack();
+  void printSensors();
+  void printImu();
 
   BtAudio &bt_;
   HwManager &hw_;
